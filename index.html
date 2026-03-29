@@ -14,313 +14,164 @@
     <style>
         /* --- CSS VARIABLES & RESET (BLUE THEME) --- */
         :root {
-            --primary-color: #4A90E2;      /* Beautiful Royal/Sky Blue */
-            --secondary-color: #87CEEB;    /* Light Sky Blue */
-            --bg-color: #F0F8FF;           /* Alice Blue */
+            --primary-color: #4A90E2;
+            --secondary-color: #87CEEB;
+            --bg-color: #F0F8FF;
             --text-color: #333333;
             --font-heading: 'Playfair Display', serif;
             --font-body: 'Poppins', sans-serif;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: var(--font-body);
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            overflow-x: hidden;
+            font-family: var(--font-body); background-color: var(--bg-color);
+            color: var(--text-color); overflow-x: hidden;
         }
 
-        h1, h2, h3 {
-            font-family: var(--font-heading);
-            color: var(--primary-color);
-        }
+        h1, h2, h3 { font-family: var(--font-heading); color: var(--primary-color); }
 
-        /* --- UTILITY CLASSES --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 50px; position: relative; }
 
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            position: relative;
-        }
-
-        /* Fade In Animation Class */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s ease;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* --- 1. HERO SECTION --- */
         .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(135deg, #E0F7FA 0%, #B3E5FC 100%);
-            position: relative;
-            overflow: hidden;
+            height: 100vh; display: flex; flex-direction: column; justify-content: center;
+            align-items: center; text-align: center; background: linear-gradient(135deg, #E0F7FA 0%, #B3E5FC 100%);
+            position: relative; overflow: hidden;
         }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            z-index: 2;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-            padding: 0 15px;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            color: #555;
-            max-width: 600px;
-            z-index: 2;
-            padding: 0 20px;
-        }
-
-        /* Floating Hearts Animation */
-        .floating-heart {
-            position: absolute;
-            color: rgba(74, 144, 226, 0.4);
-            animation: floatUp 15s linear infinite;
-            z-index: 1;
-        }
-
+        .hero h1 { font-size: 4rem; margin-bottom: 20px; z-index: 2; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); padding: 0 15px; }
+        .hero p { font-size: 1.5rem; color: #555; max-width: 600px; z-index: 2; padding: 0 20px; }
+        .floating-heart { position: absolute; color: rgba(74, 144, 226, 0.4); animation: floatUp 15s linear infinite; z-index: 1; }
         @keyframes floatUp {
             0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
             50% { opacity: 0.8; }
             100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
-        /* --- 2. GALLERY SECTION (UPDATED) --- */
-        .gallery {
-            padding: 80px 20px;
-            background: white;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 35px; /* Added proper, breathable gaps */
-        }
-
+        /* --- 2. GALLERY SECTION --- */
+        .gallery { padding: 80px 20px; background: white; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 35px; }
         .photo-card {
-            background: #ffffff;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
+            background: #ffffff; border-radius: 15px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column;
         }
-
-        .photo-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(74, 144, 226, 0.2);
-        }
-
-        .photo-img-wrapper {
-            height: 250px;
-            overflow: hidden;
-            width: 100%;
-        }
-
-        .photo-img-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .photo-card:hover .photo-img-wrapper img {
-            transform: scale(1.08); /* Soft zoom on hover */
-        }
-
-        .photo-caption {
-            padding: 18px 15px;
-            text-align: center;
-            font-size: 1rem;
-            color: #555;
-            background: #FAFAFA;
-            border-top: 1px solid #eee;
-            font-style: italic;
-        }
+        .photo-card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(74, 144, 226, 0.2); }
+        .photo-img-wrapper { height: 250px; overflow: hidden; width: 100%; }
+        .photo-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .photo-card:hover .photo-img-wrapper img { transform: scale(1.08); }
+        .photo-caption { padding: 18px 15px; text-align: center; font-size: 1rem; color: #555; background: #FAFAFA; border-top: 1px solid #eee; font-style: italic; }
 
         /* --- 3. LOVE LETTER SECTION --- */
-        .love-letter {
-            padding: 100px 20px;
-            background: linear-gradient(to right, #B3E5FC, #E1F5FE);
-            text-align: center;
-        }
-
+        .love-letter { padding: 100px 20px; background: linear-gradient(to right, #B3E5FC, #E1F5FE); text-align: center; }
         .letter-content {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 50px 40px;
-            border-radius: 15px;
-            max-width: 800px;
-            margin: 0 auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            position: relative;
+            background: rgba(255, 255, 255, 0.95); padding: 50px 40px; border-radius: 15px;
+            max-width: 800px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative;
         }
-
-        .letter-content p {
-            font-size: 1.15rem;
-            line-height: 1.8;
-            color: #444;
-            text-align: left;
-        }
+        .letter-content p { font-size: 1.15rem; line-height: 1.8; color: #444; text-align: left; }
 
         /* --- 4. AGE / COUNTDOWN SECTION --- */
-        .age-section {
-            padding: 80px 20px;
-            text-align: center;
-            background: white;
-        }
-
-        .counter-box {
-            font-size: 6rem;
-            font-family: var(--font-heading);
-            color: var(--primary-color);
-            font-weight: bold;
-            line-height: 1;
-            margin: 10px 0;
-        }
+        .age-section { padding: 80px 20px; text-align: center; background: white; }
+        .counter-box { font-size: 6rem; font-family: var(--font-heading); color: var(--primary-color); font-weight: bold; line-height: 1; margin: 10px 0; }
 
         /* --- 5. TIMELINE SECTION --- */
-        .timeline {
-            padding: 80px 20px;
-            background: var(--bg-color);
-            position: relative;
-        }
-
-        .timeline-container {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .timeline-container::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            background-color: var(--primary-color);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -2px;
-            border-radius: 2px;
-        }
-
-        .memory {
-            padding: 10px 40px;
-            position: relative;
-            background-color: inherit;
-            width: 50%;
-            box-sizing: border-box;
-            margin-bottom: 20px;
-        }
-
+        .timeline { padding: 80px 20px; background: var(--bg-color); position: relative; }
+        .timeline-container { max-width: 800px; margin: 0 auto; position: relative; }
+        .timeline-container::after { content: ''; position: absolute; width: 4px; background-color: var(--primary-color); top: 0; bottom: 0; left: 50%; margin-left: -2px; border-radius: 2px; }
+        .memory { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; box-sizing: border-box; margin-bottom: 20px; }
         .memory::after {
-            content: '💙';
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            right: -14px;
-            background-color: white;
-            border: 4px solid var(--primary-color);
-            top: 15px;
-            border-radius: 50%;
-            z-index: 1;
-            font-size: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            content: '💙'; position: absolute; width: 25px; height: 25px; right: -14px; background-color: white;
+            border: 4px solid var(--primary-color); top: 15px; border-radius: 50%; z-index: 1; font-size: 10px; display: flex; align-items: center; justify-content: center;
         }
-
         .left { left: 0; text-align: right; }
         .right { left: 50%; }
         .left::after { right: -16px; }
         .right::after { left: -16px; }
-
-        .content {
-            padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
+        .content { padding: 20px; background-color: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
 
         /* --- 6. MUSIC BUTTON --- */
         .music-btn {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 55px;
-            height: 55px;
-            background: var(--primary-color);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            z-index: 100;
-            transition: transform 0.2s;
-            font-size: 1.2rem;
+            position: fixed; bottom: 30px; left: 30px; width: 55px; height: 55px; background: var(--primary-color);
+            color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 100; transition: transform 0.2s; font-size: 1.2rem;
         }
-        
         .music-btn:hover { transform: scale(1.1); }
         .music-btn.playing { animation: pulse 1.5s infinite; }
-        
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(74, 144, 226, 0); }
             100% { box-shadow: 0 0 0 0 rgba(74, 144, 226, 0); }
         }
 
-        /* --- 7. FOOTER & SURPRISE --- */
-        .footer {
-            padding: 100px 20px;
-            text-align: center;
-            background: white;
-        }
-
+        /* --- 7. FOOTER --- */
+        .footer { padding: 100px 20px; text-align: center; background: white; }
         .footer h2 { margin-bottom: 40px; font-size: 2.5rem; }
-
         .surprise-btn {
-            padding: 18px 45px;
-            font-size: 1.2rem;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: var(--font-body);
-            font-weight: 600;
+            padding: 18px 45px; font-size: 1.2rem; background: var(--primary-color); color: white;
+            border: none; border-radius: 50px; cursor: pointer; transition: all 0.3s; font-family: var(--font-body); font-weight: 600;
         }
+        .surprise-btn:hover { background: #357ABD; transform: translateY(-5px); box-shadow: 0 8px 20px rgba(74, 144, 226, 0.4); }
 
-        .surprise-btn:hover {
-            background: #357ABD;
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.4);
+        /* --- 8. SECRET SURPRISE PAGE OVERLAY --- */
+        .surprise-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(135deg, #F0F8FF 0%, #B3E5FC 100%);
+            z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease; overflow-y: auto; padding: 20px;
+        }
+        .surprise-overlay.show { opacity: 1; pointer-events: all; }
+        .close-btn { position: absolute; top: 20px; right: 30px; font-size: 2rem; color: var(--primary-color); cursor: pointer; }
+        
+        .game-area { text-align: center; max-width: 600px; width: 100%; }
+        .game-area h2 { font-size: 2.2rem; margin-bottom: 10px; }
+        .game-area p { margin-bottom: 30px; color: #555; }
+
+        .letters-container { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+        
+        /* 3D Flip Card for Letters */
+        .letter-card {
+            width: 60px; height: 80px; perspective: 1000px; cursor: pointer;
+        }
+        .letter-inner {
+            width: 100%; height: 100%; position: relative; transition: transform 0.6s; transform-style: preserve-3d;
+        }
+        .letter-card.flipped .letter-inner { transform: rotateY(180deg); }
+        .letter-front, .letter-back {
+            width: 100%; height: 100%; position: absolute; backface-visibility: hidden;
+            display: flex; align-items: center; justify-content: center; border-radius: 10px;
+            font-size: 2rem; font-weight: bold; font-family: var(--font-heading);
+        }
+        .letter-front { background: var(--primary-color); color: white; font-size: 1.5rem; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .letter-back { background: white; color: var(--primary-color); transform: rotateY(180deg); border: 2px solid var(--primary-color); }
+
+        /* Password Input Area */
+        .password-box { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+        .password-box input {
+            padding: 12px 20px; font-size: 1.2rem; border: 2px solid var(--primary-color);
+            border-radius: 30px; text-align: center; text-transform: uppercase; outline: none; width: 250px;
+            font-family: var(--font-body); letter-spacing: 2px;
+        }
+        .unlock-btn {
+            padding: 12px 30px; font-size: 1.1rem; background: var(--primary-color); color: white;
+            border: none; border-radius: 30px; cursor: pointer; transition: 0.3s; font-family: var(--font-body);
+        }
+        .unlock-btn:hover { background: #357ABD; }
+
+        /* Final Secret Message Box */
+        .final-secret {
+            display: none; background: white; padding: 40px; border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .final-secret.show { display: block; }
+        .final-secret h3 { font-size: 2rem; margin-bottom: 20px; color: #ff6b81; } /* Pink pop for the secret */
+        .final-secret p { font-size: 1.2rem; line-height: 1.6; color: #444; }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         /* Mobile Responsiveness */
@@ -333,6 +184,8 @@
             .left::after { left: 18px; }
             .right { left: 0%; }
             .left { text-align: left; }
+            .letter-card { width: 45px; height: 60px; }
+            .letter-front, .letter-back { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -347,91 +200,54 @@
     <section class="gallery reveal">
         <h2 class="section-title">Our Beautiful Memories</h2>
         <div class="container gallery-grid">
-            
             <div class="photo-card">
-                <div class="photo-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1516961642265-531546e84af2?auto=format&fit=crop&w=400&q=80" alt="Us 1">
-                </div>
+                <div class="photo-img-wrapper"><img src="https://images.unsplash.com/photo-1516961642265-531546e84af2?auto=format&fit=crop&w=400&q=80" alt="Us 1"></div>
                 <div class="photo-caption">Your one-line description here ✨</div>
             </div>
-            
             <div class="photo-card">
-                <div class="photo-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1621609764095-64197947f7c9?auto=format&fit=crop&w=400&q=80" alt="Us 2">
-                </div>
+                <div class="photo-img-wrapper"><img src="https://images.unsplash.com/photo-1621609764095-64197947f7c9?auto=format&fit=crop&w=400&q=80" alt="Us 2"></div>
                 <div class="photo-caption">Your one-line description here ✨</div>
             </div>
-
             <div class="photo-card">
-                <div class="photo-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1516575150278-77136aed6920?auto=format&fit=crop&w=400&q=80" alt="Us 3">
-                </div>
+                <div class="photo-img-wrapper"><img src="https://images.unsplash.com/photo-1516575150278-77136aed6920?auto=format&fit=crop&w=400&q=80" alt="Us 3"></div>
                 <div class="photo-caption">Your one-line description here ✨</div>
             </div>
-
             <div class="photo-card">
-                <div class="photo-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=400&q=80" alt="Us 4">
-                </div>
+                <div class="photo-img-wrapper"><img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=400&q=80" alt="Us 4"></div>
                 <div class="photo-caption">Your one-line description here ✨</div>
             </div>
-
             <div class="photo-card">
-                <div class="photo-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=400&q=80" alt="Us 5">
-                </div>
+                <div class="photo-img-wrapper"><img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=400&q=80" alt="Us 5"></div>
                 <div class="photo-caption">Your one-line description here ✨</div>
             </div>
-
             <div class="photo-card">
-                <div class="photo-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=400&q=80" alt="Us 6">
-                </div>
+                <div class="photo-img-wrapper"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=400&q=80" alt="Us 6"></div>
                 <div class="photo-caption">Your one-line description here ✨</div>
             </div>
-
             <div class="photo-card">
-                <div class="photo-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1501901609772-df0848060b33?auto=format&fit=crop&w=400&q=80" alt="Us 7">
-                </div>
+                <div class="photo-img-wrapper"><img src="https://images.unsplash.com/photo-1501901609772-df0848060b33?auto=format&fit=crop&w=400&q=80" alt="Us 7"></div>
                 <div class="photo-caption">Your one-line description here ✨</div>
             </div>
-
             <div class="photo-card">
-                <div class="photo-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1474552226712-ac0f0961a954?auto=format&fit=crop&w=400&q=80" alt="Us 8">
-                </div>
+                <div class="photo-img-wrapper"><img src="https://images.unsplash.com/photo-1474552226712-ac0f0961a954?auto=format&fit=crop&w=400&q=80" alt="Us 8"></div>
                 <div class="photo-caption">Your one-line description here ✨</div>
             </div>
-
             <div class="photo-card">
-                <div class="photo-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=400&q=80" alt="Us 9">
-                </div>
+                <div class="photo-img-wrapper"><img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=400&q=80" alt="Us 9"></div>
                 <div class="photo-caption">Your one-line description here ✨</div>
             </div>
-
             <div class="photo-card">
-                <div class="photo-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=400&q=80" alt="Us 10">
-                </div>
+                <div class="photo-img-wrapper"><img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=400&q=80" alt="Us 10"></div>
                 <div class="photo-caption">Your one-line description here ✨</div>
             </div>
-
             <div class="photo-card">
-                <div class="photo-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=400&q=80" alt="Us 11">
-                </div>
+                <div class="photo-img-wrapper"><img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=400&q=80" alt="Us 11"></div>
                 <div class="photo-caption">Your one-line description here ✨</div>
             </div>
-
             <div class="photo-card">
-                <div class="photo-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=400&q=80" alt="Us 12">
-                </div>
+                <div class="photo-img-wrapper"><img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=400&q=80" alt="Us 12"></div>
                 <div class="photo-caption">Your one-line description here ✨</div>
             </div>
-
         </div>
     </section>
 
@@ -452,9 +268,7 @@
 
     <section class="age-section reveal">
         <h2>Welcome to</h2>
-        <div class="counter-box">
-            <span id="age-counter">0</span>
-        </div>
+        <div class="counter-box"><span id="age-counter">0</span></div>
         <p>You make 21 look incredibly beautiful!</p>
     </section>
 
@@ -497,11 +311,47 @@
 
     <footer class="footer">
         <h2>I love you forever, Tiya Pakhi 💙</h2>
-        <button class="surprise-btn" onclick="triggerConfetti()">Click for a Birthday Surprise!</button>
+        <button class="surprise-btn" onclick="openSurprise()">Click for a Birthday Surprise!</button>
     </footer>
 
+    <div class="surprise-overlay" id="surprise-overlay">
+        <i class="fas fa-times close-btn" onclick="closeSurprise()"></i>
+        
+        <div class="game-area" id="game-area">
+            <h2>Unlock Your Surprise</h2>
+            <p>Click the envelopes to reveal the secret password...</p>
+            
+            <div class="letters-container">
+                <div class="letter-card" onclick="this.classList.add('flipped')"><div class="letter-inner"><div class="letter-front"><i class="fas fa-envelope"></i></div><div class="letter-back">O</div></div></div>
+                <div class="letter-card" onclick="this.classList.add('flipped')"><div class="letter-inner"><div class="letter-front"><i class="fas fa-envelope"></i></div><div class="letter-back">K</div></div></div>
+                <div class="letter-card" onclick="this.classList.add('flipped')"><div class="letter-inner"><div class="letter-front"><i class="fas fa-envelope"></i></div><div class="letter-back">J</div></div></div>
+                <div class="letter-card" onclick="this.classList.add('flipped')"><div class="letter-inner"><div class="letter-front"><i class="fas fa-envelope"></i></div><div class="letter-back">A</div></div></div>
+                <div class="letter-card" onclick="this.classList.add('flipped')"><div class="letter-inner"><div class="letter-front"><i class="fas fa-envelope"></i></div><div class="letter-back">N</div></div></div>
+                <div class="letter-card" onclick="this.classList.add('flipped')"><div class="letter-inner"><div class="letter-front"><i class="fas fa-envelope"></i></div><div class="letter-back">N</div></div></div>
+                <div class="letter-card" onclick="this.classList.add('flipped')"><div class="letter-inner"><div class="letter-front"><i class="fas fa-envelope"></i></div><div class="letter-back">U</div></div></div>
+            </div>
+
+            <div class="password-box" id="password-box">
+                <input type="text" id="secret-pwd" placeholder="Type the word here...">
+                <button class="unlock-btn" onclick="checkPassword()">Unlock Secret</button>
+            </div>
+        </div>
+
+        <div class="final-secret" id="final-secret">
+            <h3>Secret Unlocked! 🎉</h3>
+            <p>
+                I am so proud to call you mine. Since we are navigating this beautiful long-distance journey, I want to create a space that is entirely ours.
+                <br><br>
+                <strong>Here is your hint for next year's gift:</strong><br>
+                <i>I am building a private digital world, just for you and me... An app only for us.</i> 📱💙
+                <br><br>
+                Happy 21st Birthday, my beautiful Tiya Pakhi!
+            </p>
+        </div>
+    </div>
+
     <script>
-        // 1. Floating Hearts Background
+        // Floating Hearts Background
         function createHearts() {
             const container = document.getElementById('heart-bg');
             for(let i=0; i<25; i++) {
@@ -516,45 +366,34 @@
         }
         createHearts();
 
-        // 2. Music Toggle
+        // Music Toggle
         const musicBtn = document.getElementById('music-btn');
         const bgMusic = document.getElementById('bg-music');
         let isPlaying = false;
-
         function toggleMusic() {
             if (isPlaying) {
-                bgMusic.pause();
-                musicBtn.classList.remove('playing');
-                musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+                bgMusic.pause(); musicBtn.classList.remove('playing'); musicBtn.innerHTML = '<i class="fas fa-music"></i>';
             } else {
-                bgMusic.play();
-                musicBtn.classList.add('playing');
-                musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                bgMusic.play(); musicBtn.classList.add('playing'); musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
             }
             isPlaying = !isPlaying;
         }
 
-        // 3. Scroll Animation (Fade In)
+        // Scroll Animation (Fade In)
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
+            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); } });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // 4. Age Counter Animation
+        // Age Counter Animation
         const ageElement = document.getElementById('age-counter');
         const targetAge = 21; 
         let hasCounted = false;
-
         const ageObserver = new IntersectionObserver((entries) => {
             if(entries[0].isIntersecting && !hasCounted) {
                 let current = 0;
                 const timer = setInterval(() => {
-                    current++;
-                    ageElement.innerText = current;
+                    current++; ageElement.innerText = current;
                     if(current === targetAge) clearInterval(timer);
                 }, 80); 
                 hasCounted = true;
@@ -562,28 +401,49 @@
         });
         ageObserver.observe(document.querySelector('.age-section'));
 
-        // 5. Confetti Surprise
+        // --- NEW SURPRISE LOGIC ---
+
+        function openSurprise() {
+            document.getElementById('surprise-overlay').classList.add('show');
+            document.body.style.overflow = 'hidden'; // Stop background from scrolling
+        }
+
+        function closeSurprise() {
+            document.getElementById('surprise-overlay').classList.remove('show');
+            document.body.style.overflow = 'auto'; // Re-enable background scrolling
+        }
+
+        function checkPassword() {
+            const pwd = document.getElementById('secret-pwd').value.toUpperCase().trim();
+            
+            if (pwd === "OKJANNU") {
+                // Hide the game area
+                document.getElementById('game-area').style.display = 'none';
+                // Show the final secret message
+                document.getElementById('final-secret').classList.add('show');
+                // Trigger Confetti!
+                triggerConfetti();
+            } else {
+                alert("That's not the right password, Tiya Pakhi! Make sure you click all the envelopes and spell it correctly.");
+            }
+        }
+
+        // Confetti Function
         function triggerConfetti() {
-            const duration = 3000;
+            const duration = 4000;
             const animationEnd = Date.now() + duration;
-            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0, colors: ['#4A90E2', '#87CEEB', '#ffffff'] };
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 10000, colors: ['#4A90E2', '#87CEEB', '#ffffff', '#ff6b81'] };
 
             const random = (min, max) => Math.random() * (max - min) + min;
 
             const interval = setInterval(function() {
                 const timeLeft = animationEnd - Date.now();
-
-                if (timeLeft <= 0) {
-                    return clearInterval(interval);
-                }
-
+                if (timeLeft <= 0) { return clearInterval(interval); }
                 const particleCount = 50 * (timeLeft / duration);
                 
                 confetti(Object.assign({}, defaults, { particleCount, origin: { x: random(0.1, 0.3), y: Math.random() - 0.2 } }));
                 confetti(Object.assign({}, defaults, { particleCount, origin: { x: random(0.7, 0.9), y: Math.random() - 0.2 } }));
             }, 250);
-            
-            document.querySelector('.surprise-btn').innerText = "Happy Birthday, Tiya Pakhi!! 🎉💙";
         }
     </script>
 </body>
