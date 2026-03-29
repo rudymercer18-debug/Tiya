@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 21st Birthday, My Love! 💙</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <style>
+        /* --- CSS VARIABLES & RESET (UPDATED TO BLUE THEME) --- */
+        :root {
+            --primary-color: #4A90E2;      /* Beautiful Royal/Sky Blue */
+            --secondary-color: #87CEEB;    /* Light Sky Blue */
+            --bg-color: #F0F8FF;           /* Alice Blue */
+            --text-color: #333333;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Poppins', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            color: var(--primary-color);
+        }
+
+        /* --- UTILITY CLASSES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        /* Fade In Animation Class */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- 1. HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #E0F7FA 0%, #B3E5FC 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: #555;
+            max-width: 600px;
+            z-index: 2;
+            padding: 0 20px;
+        }
+
+        /* Floating Hearts Animation */
+        .floating-heart {
+            position: absolute;
+            color: rgba(74, 144, 226, 0.4);
+            animation: floatUp 15s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+        /* --- 2. GALLERY SECTION --- */
+        .gallery {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .photo-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            height: 300px;
+        }
+
+        .photo-card:hover {
+            transform: scale(1.03);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- 3. LOVE LETTER SECTION --- */
+        .love-letter {
+            padding: 100px 20px;
+            background: linear-gradient(to right, #B3E5FC, #E1F5FE);
+            text-align: center;
+        }
+
+        .letter-content {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .letter-content p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #444;
+            text-align: left;
+        }
+
+        /* --- 4. AGE / COUNTDOWN SECTION --- */
+        .age-section {
+            padding: 60px 20px;
+            text-align: center;
+            background: white;
+        }
+
+        .counter-box {
+            font-size: 5rem;
+            font-family: var(--font-heading);
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* --- 5. TIMELINE SECTION --- */
+        .timeline {
+            padding: 80px 20px;
+            background: var(--bg-color);
+            position: relative;
+        }
+
+        .timeline-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+
+        .memory {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .memory::after {
+            content: '💙';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -14px;
+            background-color: white;
+            border: 4px solid var(--primary-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .left { left: 0; text-align: right; }
+        .right { left: 50%; }
+        .left::after { right: -16px; }
+        .right::after { left: -16px; }
+
+        .content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* --- 6. MUSIC BUTTON --- */
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: transform 0.2s;
+        }
+        
+        .music-btn:hover { transform: scale(1.1); }
+        .music-btn.playing { animation: pulse 1.5s infinite; }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(74, 144, 226, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(74, 144, 226, 0); }
+        }
+
+        /* --- 7. FOOTER & SURPRISE --- */
+        .footer {
+            padding: 100px 20px;
+            text-align: center;
+            background: white;
+        }
+
+        .footer h2 { margin-bottom: 30px; }
+
+        .surprise-btn {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: var(--font-body);
+        }
+
+        .surprise-btn:hover {
+            background: #357ABD;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+        }
+
+        /* Mobile Responsiveness */
+        @media screen and (max-width: 600px) {
+            .hero h1 { font-size: 2.5rem; }
+            .timeline-container::after { left: 31px; }
+            .memory { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .memory::after { left: 18px; }
+            .left::after { left: 18px; }
+            .right { left: 0%; }
+            .left { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="heart-bg" id="heart-bg"></div>
+        <h1>Happy 21st Birthday, My Love!</h1>
+        <p>Even when we are far apart, you are always right here in my heart.</p>
+    </section>
+
+    <section class="gallery reveal">
+        <h2 class="section-title">Our Beautiful Memories</h2>
+        <div class="container gallery-grid">
+            <div class="photo-card"><img src="https://images.unsplash.com/photo-1516961642265-531546e84af2?auto=format&fit=crop&w=400&q=80" alt="Us 1"></div>
+            <div class="photo-card"><img src="https://images.unsplash.com/photo-1621609764095-64197947f7c9?auto=format&fit=crop&w=400&q=80" alt="Us 2"></div>
+            <div class="photo-card"><img src="https://images.unsplash.com/photo-1516575150278-77136aed6920?auto=format&fit=crop&w=400&q=80" alt="Us 3"></div>
+            <div class="photo-card"><img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=400&q=80" alt="Us 4"></div>
+        </div>
+    </section>
+
+    <section class="love-letter reveal">
+        <div class="letter-content">
+            <h2 style="text-align: center; margin-bottom: 20px;">To My Favorite Person</h2>
+            <p>
+                My Dearest,<br><br>
+                Happy 21st Birthday! I know we are long-distance right now, but please remember that even if we are far apart, we are closer than ever because of the love we share. You are my absolute favorite part of every single day.<br><br>
+                I miss you so much. I miss our street food dates, hunting down the best chicken roll, momo, and puchka together. I know nothing in the world beats your mom's Chingri Macher Malai Curry, but I promise the moment we are reunited, I'm taking you to eat all your favorites. <br><br>
+                Ever since that day in August when we had our first kiss and became official, my life has felt like a beautiful playlist, and "Tum Se Hi" is always playing in the background. You are my blue sky on the cloudy days.<br><br>
+                Have the most amazing birthday. I love you, today and always.<br><br>
+                Forever yours,<br>
+                [Your Name]
+            </p>
+        </div>
+    </section>
+
+    <section class="age-section reveal">
+        <h2>Welcome to</h2>
+        <div class="counter-box">
+            <span id="age-counter">0</span>
+        </div>
+        <p>You make 21 look incredibly beautiful!</p>
+    </section>
+
+    <section class="timeline reveal">
+        <h2 class="section-title">Our Story</h2>
+        <div class="timeline-container">
+            <div class="memory left">
+                <div class="content">
+                    <h3>Our First Date</h3>
+                    <p>01 July 2025 - The day everything changed for the better.</p>
+                </div>
+            </div>
+            <div class="memory right">
+                <div class="content">
+                    <h3>It's Official & First Kiss</h3>
+                    <p>16 August 2025 - The day you became mine, sealed perfectly with our first kiss.</p>
+                </div>
+            </div>
+            <div class="memory left">
+                <div class="content">
+                    <h3>The Miles Between Us</h3>
+                    <p>Present - Doing long distance, but proving every day that our love is stronger than any distance.</p>
+                </div>
+            </div>
+            <div class="memory right">
+                <div class="content">
+                    <h3>Turning 21</h3>
+                    <p>Today - Celebrating the most amazing girl in the world.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="music-btn" id="music-btn" onclick="toggleMusic()">
+        <i class="fas fa-music"></i>
+    </div>
+    <audio id="bg-music" loop>
+        <source src="tum-se-hi.mp3" type="audio/mp3">
+    </audio>
+
+    <footer class="footer">
+        <h2>I love you forever 💙</h2>
+        <button class="surprise-btn" onclick="triggerConfetti()">Click for a Birthday Surprise!</button>
+    </footer>
+
+    <script>
+        // 1. Floating Hearts Background (Now Blue)
+        function createHearts() {
+            const container = document.getElementById('heart-bg');
+            for(let i=0; i<20; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.innerHTML = '💙';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 5 + 10) + 's';
+                heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                container.appendChild(heart);
+            }
+        }
+        createHearts();
+
+        // 2. Music Toggle
+        const musicBtn = document.getElementById('music-btn');
+        const bgMusic = document.getElementById('bg-music');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicBtn.classList.remove('playing');
+                musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+            } else {
+                bgMusic.play();
+                musicBtn.classList.add('playing');
+                musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // 3. Scroll Animation (Fade In)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // 4. Age Counter Animation
+        const ageElement = document.getElementById('age-counter');
+        const targetAge = 21; // UPDATED TO 21
+        let hasCounted = false;
+
+        const ageObserver = new IntersectionObserver((entries) => {
+            if(entries[0].isIntersecting && !hasCounted) {
+                let current = 0;
+                const timer = setInterval(() => {
+                    current++;
+                    ageElement.innerText = current;
+                    if(current === targetAge) clearInterval(timer);
+                }, 80); // Speed of counter
+                hasCounted = true;
+            }
+        });
+        ageObserver.observe(document.querySelector('.age-section'));
+
+        // 5. Confetti Surprise (Blue & White theme)
+        function triggerConfetti() {
+            const duration = 3000;
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0, colors: ['#4A90E2', '#87CEEB', '#ffffff'] };
+
+            const random = (min, max) => Math.random() * (max - min) + min;
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                const particleCount = 50 * (timeLeft / duration);
+                
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: random(0.1, 0.3), y: Math.random() - 0.2 } }));
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: random(0.7, 0.9), y: Math.random() - 0.2 } }));
+            }, 250);
+            
+            document.querySelector('.surprise-btn').innerText = "Happy 21st Birthday!! 🎉💙";
+        }
+    </script>
+</body>
+</html>
